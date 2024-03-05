@@ -1,6 +1,5 @@
 import socket
 
-
 # Função para receber as perguntas e enviar as respostas
 def receive_and_send():
     # Conecta ao servidor
@@ -20,6 +19,7 @@ def receive_and_send():
             if option.strip():  # Ignora linhas em branco
                 print(option)
 
+        client_socket.settimeout(15)
         # Recebe a resposta do usuário
         response = input("Responda com a letra correspondente à sua escolha: ").strip().lower()
         client_socket.sendall(response.encode())
