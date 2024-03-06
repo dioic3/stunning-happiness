@@ -6,7 +6,7 @@ import threading
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="root_password",
+    password="Bi%%J?rWa=9f8vR",
     database="quiz"
 )
 
@@ -15,9 +15,10 @@ def send_questions(client_socket):
     cursor = mydb.cursor()
     cursor.execute("SELECT * FROM questions")
     questions = cursor.fetchall()
+    
     for question in questions:
         # Envia a pergunta
-        client_socket.sendall(question[1].encode() + b'\n')
+        client_socket.sendall((question[1] + '\n').encode())
 
         # Envia as opções de resposta
         options = ['a', 'b', 'c', 'd']
@@ -25,7 +26,7 @@ def send_questions(client_socket):
             client_socket.sendall(f"{options[i-2]}) {question[i]}\n".encode())
 
         # Recebe a resposta do cliente com um temporizador
-        client_socket.settimeout(15)  # 15 segundos para resposta
+        client_socket.settimeout(30)  # 30 segundos para resposta
         try:
             client_response = client_socket.recv(1024).decode().strip().lower()
         except socket.timeout:
@@ -36,7 +37,11 @@ def send_questions(client_socket):
         if client_response == question[6].lower():
             client_socket.sendall(b"Correct!\n")
         else:
-            client_socket.sendall(b"Wrong!\n")
+            client_socket.sendall(b"Wrong! The correct answer is " + question[6].encode() + b"\n")
+
+    # Indica que não há mais perguntas
+    client_socket.sendall(b"No more questions\n")
+    client_socket.settimeout(None)  # Remove o timeout
 
 # Função para lidar com a conexão de um cliente
 def handle_client(client_socket):
