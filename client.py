@@ -1,16 +1,17 @@
 import socket
 
-# Função para receber as perguntas e enviar as respostas
 def receive_and_send():
     # Conecta ao servidor
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect(('localhost', 12345))
 
-    # Recebe e mostra as perguntas e opções
     while True:
+        # Recebe a pergunta
         question = client_socket.recv(1024).decode()
-        if not question:
+        if question == "No more questions":
+            print("No more questions. Quiz complete.")
             break
+
         print(question)
 
         # Recebe e mostra as opções de resposta
@@ -19,8 +20,7 @@ def receive_and_send():
             if option.strip():  # Ignora linhas em branco
                 print(option)
 
-        client_socket.settimeout(15)
-        # Recebe a resposta do usuário
+        # Solicita a resposta do usuário
         response = input("Responda com a letra correspondente à sua escolha: ").strip().lower()
         client_socket.sendall(response.encode())
 
