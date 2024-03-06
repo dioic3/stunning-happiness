@@ -14,14 +14,14 @@
 
 ### Requisitos
 
-- [Python 3.x](https://www.python.org/downloads/): Instale o Python 3.x instalado no seu sistema.
-- Bibliotecas Python:
+- **[Python 3.x](https://www.python.org/downloads/)**: Instale o Python 3.x instalado no seu sistema.
+- **Bibliotecas Python:**
   - `socket`: A biblioteca `socket` é uma parte integrada do Python, então não é necessário instalá-la separadamente.
   - `mysql-connector-python`: Você pode instalar a biblioteca `mysql-connector-python` usando o gerenciador de pacotes pip. Execute o seguinte comando no terminal ou prompt de comando:
     ```
     pip install mysql-connector-python
     ```
-- [Docker](https://docs.docker.com/get-docker/): Para garantir que tudo está funcionando conforme o esperado, é crucial instalar o docker. Você pode baixar e instalar o Docker a partir do site oficial do Docker. Siga as instruções de instalação para o seu sistema operacional.
+- **[Docker](https://docs.docker.com/get-docker/):** Para garantir que tudo está funcionando conforme o esperado, é crucial instalar o docker. Você pode baixar e instalar o Docker a partir do site oficial do Docker. Siga as instruções de instalação para o seu sistema operacional.
 
 ### Passos para Executar
 
@@ -37,7 +37,7 @@ docker-compose up -d
 
 #### 2. Configurar o Banco de Dados
 
-1. Navegue até o diretório onde o arquivo(`init.sql`) está localizado.
+1. Navegue até o diretório onde o arquivo (`init.sql`) está localizado.
 2. Execute o comando para criar o banco de dados e a tabela necessária.
 ```bash
 mysql -u root -p < init.sql
